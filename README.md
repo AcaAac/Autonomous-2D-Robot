@@ -1,6 +1,6 @@
 # 2D Autonomous Robot
 
-This project simulates a 2D autonomous robot that aims to reach the closest targets in a smooth manner. Once the targets are reached, they are "caught" and killed. The system uses a publisher-subscriber and client-server architecture for interaction between nodes.
+This project simulates a 2D autonomous robot (ROS2) that aims to reach the closest targets in a smooth manner. Once the targets are reached, they are "caught" and killed. The system uses a publisher-subscriber and client-server architecture for interaction between nodes.
 
 ### Project Structure
 
