@@ -131,3 +131,4 @@ After making the necessary changes to package.xml and CMakeLists.txt
 # Run Project
 
 `~/ros2 launch my_robot_bringup turtle_controller.launch.py`
+![Simulator Example for Catch_Closest_Turtle Mode, with turtles spawning every 2 seconds](src/Example_1.png)
