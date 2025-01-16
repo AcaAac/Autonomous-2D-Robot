@@ -94,63 +94,44 @@ def generate_launch_description():
 
     return ld
 ```
-# How to Run the Project
-
-# 1. Make sure you have ROS 2 (e.g., Foxy, Galactic, or Humble) installed.
-# 2. Navigate to your ROS 2 workspace directory:
-cd ~/ros2_ws
-
-# 3. Clone the repository containing the project files:
-git clone <URL-to-repository>
-
-# 4. Build the workspace:
-colcon build --symlink-install
-
-# 5. Source the workspace:
-source install/setup.bash
-
-# 6. Launch the system using the launch file:
-ros2 launch my_turtle_controller spawn_and_control.launch.py
-
-# This will start:
-# - turtlesim_node (the simulation environment)
-# - turtle_controller node (to control the main turtle to reach closest targets)
-# - spawn_turtle node (to spawn and kill turtles at a specified frequency)
-
-# 7. The robot will automatically start moving toward the closest turtle. When caught, the turtle will be killed.
-# You can observe the progress through ROS 2 logs.
-
-# Parameters
-
-# These are the parameters that can be configured for each node:
-
-# 1. turtle_controller node:
-#    - catch_closes_turtle_first (default: True)  
-#      Determines whether the robot should catch the closest turtle first or the first turtle in the list.
-
-# 2. spawn_turtle node:
-#    - spawn_frequency (default: 2)
-#      Defines how often new turtles are spawned (in seconds).
-#    - turtle_name_prefix (default: "turtle")
-#      Prefix for the names of the spawned turtles.
-
-# Example of launching the nodes with specific parameters:
-
-ros2 launch my_turtle_controller spawn_and_control.launch.py catch_closes_turtle_first:=false spawn_frequency:=3 turtle_name_prefix:="my_turtle"
-
 # Services
 
-# The following services are used in this project:
+The following services are used in this project:
+1. `/catch_turtle` (service server in `spawn_turtle` node):
+   - Request: A custom message with the turtle name.
+   - Response: Confirms whether the turtle was successfully caught and removed.
+   - Used by: The turtle_controller node when a turtle is caught to request its removal.
 
-# 1. /catch_turtle (service server in spawn_turtle node):
-#    - Request: A custom message with the turtle name.
-#    - Response: Confirms whether the turtle was successfully caught and removed.
-#    - Used by: The turtle_controller node when a turtle is caught to request its removal.
+2. `/spawn` (service client in spawn_turtle node):
+   - Request: The x, y, and theta positions to spawn the turtle in the turtlesim simulation.
+   - Response: Confirmation of the spawned turtle with its assigned name.
 
-# 2. /spawn (service client in spawn_turtle node):
-#    - Request: The x, y, and theta positions to spawn the turtle in the turtlesim simulation.
-#    - Response: Confirmation of the spawned turtle with its assigned name.
+3. `/kill` (service client in spawn_turtle node):
+   - Request: The name of the turtle to be killed.
+   - Response: Confirmation that the turtle was killed.
 
-# 3. /kill (service client in spawn_turtle node):
-#    - Request: The name of the turtle to be killed.
-#    - Response: Confirmation that the turtle was killed.
+Edit package.xml in `my_robot_bring_up`:
+1. Open the package.xml file in the `my_robot_bring_up` package.
+2. Remove the following dependencies:
+   - `my_cpp_pkg`
+   - `my_py_pkg`
+Example of what to remove:
+  <depend>`my_cpp_pkg`</depend>
+  <depend>`my_py_pkg`</depend>
+
+Edit CMakeLists.txt in `my_robot_interfaces`:
+1. Open the CMakeLists.txt file in the `my_robot_interfaces` package.
+2. Remove the following message and service definitions:
+   - `msg/HardwareStatus.msg`
+   - `srv/ComputeRectangleArea.srv`
+   - `msg/LedStates.msg`
+   - `srv/SetLed.srv`
+Example of what to remove:
+  `rosidl_generate_interfaces(${PROJECT_NAME}`
+    `msg/HardwareStatus.msg`
+    `srv/ComputeRectangleArea.srv`
+    `msg/LedStates.msg`
+    `srv/SetLed.srv`
+  )
+
+
