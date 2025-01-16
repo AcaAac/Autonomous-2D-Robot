@@ -2,6 +2,8 @@
 
 This project simulates a 2D autonomous robot (ROS2) that aims to reach the closest targets in a smooth manner. Once the targets are reached, they are "caught" and killed. The system uses a publisher-subscriber and client-server architecture for interaction between nodes.
 
+![Simulator Example for Catch_Closest_Turtle Mode, with turtles spawning every 2 seconds](src/Example_1.png)
+
 ### Project Structure
 
 The project consists of three main ROS nodes:
@@ -131,4 +133,3 @@ After making the necessary changes to package.xml and CMakeLists.txt
 # Run Project
 
 `~/ros2 launch my_robot_bringup turtle_controller.launch.py`
-![Simulator Example for Catch_Closest_Turtle Mode, with turtles spawning every 2 seconds](src/Example_1.png)
