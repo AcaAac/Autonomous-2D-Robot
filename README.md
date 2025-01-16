@@ -115,13 +115,19 @@ Edit package.xml in `my_robot_bring_up`:
 2. Remove the following dependencies:
    - `my_cpp_pkg`
    - `my_py_pkg`
+# Note:
+It's possible the schema declaration - `<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>` - needs to be removed for the project to run on your machine.
 
 Edit CMakeLists.txt in `my_robot_interfaces`:
 1. Open the CMakeLists.txt file in the `my_robot_interfaces` package.
 2. Remove the following message and service definitions:
    - `msg/HardwareStatus.msg`
    - `srv/ComputeRectangleArea.srv`
+  
+After making the necessary changes to package.xml and CMakeLists.txt
    - `msg/LedStates.msg`
    - `srv/SetLed.srv`
 
+# Run Project
 
+`~/ros2 launch my_robot_bringup turtle_controller.launch.py`
