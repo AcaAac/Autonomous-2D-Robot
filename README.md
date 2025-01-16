@@ -115,9 +115,6 @@ Edit package.xml in `my_robot_bring_up`:
 2. Remove the following dependencies:
    - `my_cpp_pkg`
    - `my_py_pkg`
-Example of what to remove:
-  <depend>`my_cpp_pkg`</depend>
-  <depend>`my_py_pkg`</depend>
 
 Edit CMakeLists.txt in `my_robot_interfaces`:
 1. Open the CMakeLists.txt file in the `my_robot_interfaces` package.
@@ -126,12 +123,5 @@ Edit CMakeLists.txt in `my_robot_interfaces`:
    - `srv/ComputeRectangleArea.srv`
    - `msg/LedStates.msg`
    - `srv/SetLed.srv`
-Example of what to remove:
-  `rosidl_generate_interfaces(${PROJECT_NAME}`
-    `msg/HardwareStatus.msg`
-    `srv/ComputeRectangleArea.srv`
-    `msg/LedStates.msg`
-    `srv/SetLed.srv`
-  )
 
 
